@@ -1,2 +1,3 @@
-export observableViewModel from './create-view-model';
-export observablePromise from './observable-promise';
+export {default as observableViewModel} from './create-view-model';
+export {default as observablePromise , ObservablePromiseModel } from './observable-promise';
+export {ObservableTempState} from './observable-temp-state'; 
