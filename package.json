@@ -6,10 +6,10 @@
   "author": "duanguang",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf lib && babel src --out-dir lib",
+    "build": "rimraf lib && babel src --out-dir lib && bash build.sh",
     "test": "cross-env NODE_ENV=test nyc mocha --no-timeouts",
     "debug": "mocha --require babel-register --no-timeouts",
-    "prepublish": "rimraf lib && babel src --out-dir lib"
+    "prepublish": "rimraf lib && babel src --out-dir lib && bash build.sh"
   },
   "files": [
   "lib"
