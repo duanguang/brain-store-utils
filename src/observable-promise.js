@@ -13,7 +13,9 @@ export const promiseStatus = {
     resolved: 'resolved',
     rejected: 'rejected'
 };
-
+function isPromise(obj) {
+    return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';   
+}
 export class ObservablePromiseModel {
     // promise = null;
     @observable state = promiseStatus.none;
@@ -22,7 +24,7 @@ export class ObservablePromiseModel {
 
     constructor(promise) {
         // this.promise = promise;
-        if(promise&&promise instanceof Promise){
+        if(promise&&isPromise(promise)){
             this.state=promiseStatus.pending;
             promise.then(
                 action(RESOLVE_ACTION, (value) => {
@@ -48,5 +50,11 @@ export class ObservablePromiseModel {
 
     @computed get isRejected() {
         return this.state == promiseStatus.resolved;
+    }
+    @action
+    clear(){
+       this.value=null;
+       this.state=promiseStatus.none;
+       this.error=null;
     }
 }
