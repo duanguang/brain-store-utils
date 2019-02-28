@@ -1,6 +1,6 @@
 {
   "name": "brain-store-utils",
-  "version": "0.0.5",
+  "version": "0.1.2",
   "description": "React Framework",
   "main": "lib/index.js",
   "author": "duanguang",
@@ -43,7 +43,7 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "brain-store": "latest",
+    "brain-store": "^0.1.2",
     "invariant": "^2.2.1",
     "warning": "^3.0.0"
   }
