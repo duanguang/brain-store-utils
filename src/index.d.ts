@@ -21,7 +21,7 @@ export declare namespace observablePromise{
          *
          * @type {(T|any)}
          */
-        value:T|any
+        value:T
 
         /**
          *是否请求中
@@ -78,7 +78,7 @@ export class ObservablePromiseModel<T>{
          *
          * @type {(T|any)}
          */
-        value:T|any
+        value:T
 
         /**
          *是否请求中
