@@ -163,3 +163,65 @@ export class ObservableTempState<T>{
          */
         clear():void
 }
+
+export class ViewModel<T>{
+    constructor(model:T);
+
+    /**
+     * model 数据信息,使用默认值赋初始值，并通过submit 方法更新
+     *
+     * @type {T}
+     * @memberof ViewModel
+     */
+    model:T
+
+
+    /**
+     * 移除映射中的所有项，回默认值
+     *
+     * @memberof ViewModel
+     */
+    reset:()=>void
+
+
+    /**
+     *  把给定键和它的值从映射中删除。
+     *
+     * @memberof ViewModel
+     */
+    resetProperty:(key:string)=> void
+
+
+    /**
+     *
+     * 是否更新
+     * @type {boolean}
+     * @memberof ViewModel
+     */
+    isDirty:boolean
+
+
+    /**
+     *
+     * 判定是否存在属性名称
+     * @memberof ViewModel
+     */
+    isPropertyDirty:(key:string)=>boolean
+
+
+    /**
+     * 
+     * 移除映射中的所有项，并更新model信息
+     * @memberof ViewModel
+     */
+    submit:()=>void
+}
+type Proxy<T> = {
+    get(): T;
+    set(value: T): void;
+}
+type Proxify<T> = {
+    [P in keyof T]: T[P];
+    //[P in keyof T]: Proxy<T[P]>;
+}
+export function observableViewModel<T>(model:T):ViewModel<T>&Proxify<T>

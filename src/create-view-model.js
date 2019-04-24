@@ -10,8 +10,10 @@ function observableViewModel(model) {
 
 export class ViewModel {
     _observableModel;
-    _localValues = asMap({});
+    _localValues = observable.map();
     constructor(model) {
+        invariant(!Array.isArray(model), `传入参数必须是一个纯对象，且不是数组对象`);
+        invariant(typeof model==='object', `传入参数必须是一个纯对象`);
         this._observableModel = isObservableObject(model) ? model : observable.shallowObject(model);
         Object.keys(model).forEach(key => {
             invariant(RESERVED_NAMES.indexOf(key) === -1, `The propertyname ${key} is reserved and cannot be used with viewModels`);

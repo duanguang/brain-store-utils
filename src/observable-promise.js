@@ -41,15 +41,15 @@ export class ObservablePromiseModel {
     }
 
     @computed get isPending() {
-        return this.state == promiseStatus.pending;
+        return this.state === promiseStatus.pending;
     }
 
     @computed get isResolved() {
-        return this.state == promiseStatus.resolved;
+        return this.state === promiseStatus.resolved;
     }
 
     @computed get isRejected() {
-        return this.state == promiseStatus.resolved;
+        return this.state === promiseStatus.rejected;
     }
     @action
     clear(){
