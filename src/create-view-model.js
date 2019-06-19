@@ -1,6 +1,6 @@
 import {mobx} from "brain-store/lib/index";
 import  invariant from "invariant";
-const {action, asMap, observable, isObservableObject, isObservableArray, isObservableMap, computed} = mobx;
+const {action, asMap, observable, isObservableObject, isObservableArray, isObservableMap, computed,isComputed} = mobx;
 
 const RESERVED_NAMES = ["model", "reset", "submit", "isDirty", "isPropertyDirty"];
 
@@ -11,14 +11,19 @@ function observableViewModel(model) {
 export class ViewModel {
     _observableModel;
     _localValues = observable.map();
+    /* _defaultModel */
     constructor(model) {
         invariant(!Array.isArray(model), `传入参数必须是一个纯对象，且不是数组对象`);
-        invariant(typeof model==='object', `传入参数必须是一个纯对象`);
+        invariant(typeof model==='object', `传入参数必须是一个纯对象`);  
+        /* this._defaultModel = {...model }    */
         this._observableModel = isObservableObject(model) ? model : observable.shallowObject(model);
         Object.keys(model).forEach(key => {
+            const descriptor = Object.getOwnPropertyDescriptor(model, key);
+            const additionalDescriptor = descriptor ? { enumerable: descriptor.enumerable } : {};
             invariant(RESERVED_NAMES.indexOf(key) === -1, `The propertyname ${key} is reserved and cannot be used with viewModels`);
             Object.defineProperty(this, key, {
-                enumerable: true,
+                /* enumerable: true, */
+                ...additionalDescriptor,
                 configurable: true,
                 get: () => {
                     if (this.isPropertyDirty(key)){
@@ -40,7 +45,12 @@ export class ViewModel {
         return mobx.toJS(this._observableModel);
     }
 
+    @computed
+    get changedValues() {
+        return this.localValues.toJS()
+    }
     @action reset() {
+        /* this._observableModel={...this._defaultModel} */
         this._localValues.clear();
     }
 
