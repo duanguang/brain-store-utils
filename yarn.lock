@@ -976,9 +976,9 @@ braces@^1.8.2:
     preserve "^0.2.0"
     repeat-element "^1.1.2"
 
-brain-store@latest:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/brain-store/-/brain-store-0.0.7.tgz#e5b754bdf8ccd9c2344520428792e501f8f06457"
+brain-store@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.npm.taobao.org/brain-store/download/brain-store-0.1.9.tgz#23a15719b7f8e28cecf8a0b07d9a8bf8e171bcff"
   dependencies:
     invariant "^2.2.1"
     is-plain-object "^2.0.1"

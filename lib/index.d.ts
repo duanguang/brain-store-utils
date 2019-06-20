@@ -201,6 +201,7 @@ export class ViewModel<T>{
     isDirty:boolean
 
 
+    changedValues: Proxify<T>
     /**
      *
      * 判定是否存在属性名称
@@ -215,6 +216,20 @@ export class ViewModel<T>{
      * @memberof ViewModel
      */
     submit:()=>void
+
+    /**
+     *
+     * 初始化数据模型
+     * @memberof ViewModel
+     */
+    initialize:(model:T)=>void
+    /**
+     *
+     * 修改store上面变量值，严格模式下，必须在action 里面修改值
+     * @param {*} dispatch 函数
+     * @memberof ViewModel
+     */
+    dispatchAction:(dispatch:Function)=>void 
 }
 type Proxy<T> = {
     get(): T;
