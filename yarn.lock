@@ -976,13 +976,13 @@ braces@^1.8.2:
     preserve "^0.2.0"
     repeat-element "^1.1.2"
 
-brain-store@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/brain-store/download/brain-store-0.1.9.tgz#23a15719b7f8e28cecf8a0b07d9a8bf8e171bcff"
+brain-store@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/brain-store/download/brain-store-1.0.0.tgz#01b622526a2837076b0744adc771f2f3cb07b444"
   dependencies:
     invariant "^2.2.1"
     is-plain-object "^2.0.1"
-    mobx "^3.0.0"
+    mobx "^5.0.0"
     superagent "^3.4.4"
     warning "^3.0.0"
 
@@ -2519,9 +2519,9 @@ mkdirp@0.5.1, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
   dependencies:
     minimist "0.0.8"
 
-mobx@^3.0.0:
-  version "3.1.9"
-  resolved "https://registry.yarnpkg.com/mobx/-/mobx-3.1.9.tgz#ed4af9d874ff6032c7af91fc1b87d9d33122a557"
+mobx@^5.0.0:
+  version "5.11.0"
+  resolved "https://registry.npm.taobao.org/mobx/download/mobx-5.11.0.tgz#58c64769bc2408ccde35fc2bac4cd5b8ae7b28a6"
 
 mocha@^3.2.0:
   version "3.3.0"

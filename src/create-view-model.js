@@ -1,6 +1,6 @@
 import {mobx} from "brain-store/lib/index";
 import  invariant from "invariant";
-const {action, asMap, observable, isObservableObject, isObservableArray, isObservableMap, computed,isComputed,extras} = mobx;
+const {action, asMap, observable, isObservableObject, isObservableArray, isObservableMap, computed,isComputed,extras,isComputedProp, _getAdministration} = mobx;
 import {cloneDeep} from 'lodash'
 const RESERVED_NAMES = ["model", "reset", "submit", "isDirty", "isPropertyDirty"];
 import { getAllMethodsAndProperties } from './utils';
@@ -17,13 +17,13 @@ export class ViewModel {
         invariant(!Array.isArray(model), `传入参数必须是一个纯对象，且不是数组对象`);
         invariant(typeof model==='object', `传入参数必须是一个纯对象`);  
         this._defaultModel =cloneDeep(model) 
-        this._observableModel = isObservableObject(model) ? model : observable.shallowObject(model);
+        this._observableModel = isObservableObject(model) ? model : observable.object(model);
         getAllMethodsAndProperties(model).forEach(key => {
             const descriptor = Object.getOwnPropertyDescriptor(model, key);
             const additionalDescriptor = descriptor ? { enumerable: descriptor.enumerable } : {};
             invariant(RESERVED_NAMES.indexOf(key) === -1, `The propertyname ${key} is reserved and cannot be used with viewModels`);
-            if (isComputed(model, key)) {
-                const derivation = extras.getAdministration(model, key).derivation // Fixme: there is no clear api to get the derivation
+            if (isComputedProp(model, key)) {
+                const derivation =  _getAdministration(model, key).derivation // Fixme: there is no clear api to get the derivation
                 this.localComputedValues.set(key, computed(derivation.bind(this)))
             }
             Object.defineProperty(this, key, {
@@ -31,7 +31,7 @@ export class ViewModel {
                 /* ...additionalDescriptor, */
                 configurable: true,
                 get: () => {
-                    if (isComputed(model, key)) return this.localComputedValues.get(key).get()
+                    if (isComputedProp(model, key)) return this.localComputedValues.get(key).get()
                     if (this.isPropertyDirty(key)){
                         return this._localValues.get(key);
                     }
@@ -82,7 +82,7 @@ export class ViewModel {
             } else if (isObservableMap(destination)) {
                 destination.clear()
                 destination.merge(source)
-            } else if (!isComputed(source)) {
+            } else if (!isComputedProp(source)) {
                 this._observableModel[key] = source
             }
         });

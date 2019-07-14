@@ -1,6 +1,6 @@
 {
   "name": "brain-store-utils",
-  "version": "0.1.12",
+  "version": "1.0.2",
   "description": "React Framework",
   "main": "lib/index.js",
   "author": "duanguang",
@@ -12,7 +12,7 @@
     "prepublish": "rimraf lib && babel src --out-dir lib && bash build.sh"
   },
   "files": [
-  "lib"
+    "lib"
   ],
   "homepage": "https://github.com/duanguang/brain-store-utils.git",
   "repository": {
@@ -43,7 +43,7 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "brain-store": "^0.1.9",
+    "brain-store": "^1.0.2",
     "invariant": "^2.2.1",
     "warning": "^3.0.0"
   }
