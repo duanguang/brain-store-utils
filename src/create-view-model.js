@@ -1,6 +1,6 @@
 import {mobx} from "brain-store/lib/index";
 import  invariant from "invariant";
-const {action, asMap, observable, isObservableObject, isObservableArray, isObservableMap, computed,isComputed,extras,isComputedProp, _getAdministration} = mobx;
+const {action,keys, asMap, observable, isObservableObject, isObservableArray, isObservableMap, computed,isComputed,extras,isComputedProp, _getAdministration} = mobx;
 import {cloneDeep} from 'lodash'
 const RESERVED_NAMES = ["model", "reset", "submit", "isDirty", "isPropertyDirty"];
 import { getAllMethodsAndProperties } from './utils';
@@ -73,7 +73,8 @@ export class ViewModel {
     }
 
     @action submit() {
-        this._localValues.keys().forEach((key) => {
+        
+        keys(this._localValues).forEach((key) => {
             const source = this._localValues.get(key);
             /* this._observableModel[key] = source; */
             const destination = this._observableModel[key]         
@@ -82,7 +83,7 @@ export class ViewModel {
             } else if (isObservableMap(destination)) {
                 destination.clear()
                 destination.merge(source)
-            } else if (!isComputedProp(source)) {
+            } else if (!isComputedProp(source,key)) {
                 this._observableModel[key] = source
             }
         });
