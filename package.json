@@ -12,12 +12,15 @@
     "prepublish": "rimraf lib && babel src --out-dir lib && bash build.sh"
   },
   "files": [
-  "lib"
+    "lib"
   ],
   "homepage": "https://github.com/duanguang/brain-store-utils.git",
   "repository": {
     "type": "git",
     "url": "https://github.com/duanguang/brain-store-utils.git"
+  },
+  "peerDependencies": {
+    "mobx": ">=3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
@@ -43,7 +46,6 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "brain-store": "^0.1.9",
     "invariant": "^2.2.1",
     "warning": "^3.0.0"
   }
