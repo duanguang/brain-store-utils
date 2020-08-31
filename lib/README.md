@@ -31,6 +31,10 @@
 * fix: 优化不同 mobx 版本被迫拆分为多个版本来做兼容，现在合并成一个版本兼容不同 mobx
 * fix: 暂时废弃 1.x 版本维护，主维护分支切换到 o.x 版本
 
+## 废弃版本
+
+npm deprecate brain-store-utils@"<0.1.3" "Error packet semantic"
+
 # Licensing
 
 MIT license
