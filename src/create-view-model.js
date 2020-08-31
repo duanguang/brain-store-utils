@@ -45,12 +45,12 @@ export class ViewModel {
     invariant(typeof model === 'object', `传入参数必须是一个纯对象`);
     this._defaultModel = cloneDeep(model);
     const shallowObject = {
-      v3: observable.shallowObject(model),
-      v4: observable.object(model),
+      v3: observable.shallowObject,
+      v4: observable.object,
     };
     this._observableModel = isObservableObject(model)
       ? model
-      : shallowObject[MOBX_VERSION];
+      : shallowObject[MOBX_VERSION](model);
     getAllMethodsAndProperties(model).forEach(key => {
       const descriptor = Object.getOwnPropertyDescriptor(model, key);
       const additionalDescriptor = descriptor
@@ -61,7 +61,7 @@ export class ViewModel {
         `The propertyname ${key} is reserved and cannot be used with viewModels`
       );
       if (getComputedProp[MOBX_VERSION](model, key)) {
-        const derivation = getAdministration(MOBX_VERSION)(model, key)
+        const derivation = getAdministration[MOBX_VERSION](model, key)
           .derivation; // Fixme: there is no clear api to get the derivation
         this.localComputedValues.set(key, computed(derivation.bind(this)));
       }
