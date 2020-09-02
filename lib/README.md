@@ -24,12 +24,13 @@
 
 ## ChangeLog
 
-## 0.1.13 (2020-08-31)
+## 0.1.13-beta.2 (2020-08-31)
 
 - fix: 优化 brain-store/mobx 依赖路径，不直接依赖 brain-store/mobx ,导致因外部升级版本而被迫频繁升级
 
 * fix: 优化不同 mobx 版本被迫拆分为多个版本来做兼容，现在合并成一个版本兼容不同 mobx
 * fix: 暂时废弃 1.x 版本维护，主维护分支切换到 o.x 版本
+* fix: 修复 mobx.extras v4 版本 undefined 使用报错
 
 ## 废弃版本
 

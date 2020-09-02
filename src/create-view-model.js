@@ -24,7 +24,7 @@ const getComputedProp = {
   v4: mobx.isComputedProp,
 };
 const getAdministration = {
-  v3: extras.getAdministration,
+  v3: extras ? extras.getAdministration : null,
   v4: mobx._getAdministration,
 };
 import { getAllMethodsAndProperties, MOBX_VERSION } from './utils';
