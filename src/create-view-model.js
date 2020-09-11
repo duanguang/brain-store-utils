@@ -116,26 +116,30 @@ export class ViewModel {
   @action submit() {
     const getItemKeys = {
       v3: this._localValues.keys(),
-      v4: mobx.keys(this._localValues),
+      v4: mobx.keys ? mobx.keys(this._localValues) : null,
     };
-
-    getItemKeys[MOBX_VERSION].forEach(key => {
-      const source = this._localValues.get(key);
-      const isComputedProps = {
-        v3: isComputed(source),
-        v4: mobx.isComputedProp(source, key),
-      };
-      /* this._observableModel[key] = source; */
-      const destination = this._observableModel[key];
-      if (isObservableArray(destination)) {
-        destination.replace(source);
-      } else if (isObservableMap(destination)) {
-        destination.clear();
-        destination.merge(source);
-      } else if (!isComputedProps[MOBX_VERSION]) {
-        this._observableModel[key] = source;
-      }
-    });
+    if (getItemKeys[MOBX_VERSION]) {
+      getItemKeys[MOBX_VERSION].forEach(key => {
+        const source = this._localValues.get(key);
+        const isComputedProps = {
+          v3: isComputed ? isComputed(source) : null,
+          v4: mobx.isComputedProp ? mobx.isComputedProp(source, key) : null,
+        };
+        /* this._observableModel[key] = source; */
+        const destination = this._observableModel[key];
+        if (isObservableArray(destination)) {
+          destination.replace(source);
+        } else if (isObservableMap(destination)) {
+          destination.clear();
+          destination.merge(source);
+        } else if (
+          isComputedProps[MOBX_VERSION] !== null &&
+          !isComputedProps[MOBX_VERSION]
+        ) {
+          this._observableModel[key] = source;
+        }
+      });
+    }
     this._localValues.clear();
   }
 
