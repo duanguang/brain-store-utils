@@ -24,6 +24,10 @@
 
 ## ChangeLog
 
+## 0.1.13-beta.3 (2020-09-11)
+
+- fix: 修复 vmodel 函数 submit 方法在 mobx 不同版本判定导致报错
+
 ## 0.1.13-beta.2 (2020-08-31)
 
 - fix: 优化 brain-store/mobx 依赖路径，不直接依赖 brain-store/mobx ,导致因外部升级版本而被迫频繁升级
